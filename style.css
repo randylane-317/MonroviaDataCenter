@@ -1,0 +1,380 @@
+/* Color Variables */
+:root {
+  --red: #B30000;          /* Primary */
+  --red-dark: #8F0000;
+  --green: #006600;        /* Primary action (Donate) */
+  --green-dark: #004d00;
+  --gold: #FFD54F;         /* Optional highlight */
+  --text: #222222;         /* Body text */
+  --muted: #555555;        /* Secondary text */
+  --bg: #F9F9F9;           /* Page background */
+  --panel: #ffffff;        /* Cards */
+  --line: #ececec;         /* Dividers */
+}
+
+/* Reset body so navbar doesn't overlap */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background: var(--bg);
+    color: var(--text);
+    padding-top: 60px; /* offset for fixed navbar */
+  }
+  
+  /* Navbar Styles */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--red);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(179, 0, 0, 0.2);
+  }
+  
+  .navbar h1 {
+    font-size: 1.2rem;
+    flex: 0 1 auto; 
+    margin: 0 1rem 0 0;
+  }
+  
+  .navbar nav {
+    display: flex;
+    gap: 15px;
+    flex: 1 1 auto;   /* allow shrink */
+  justify-content: flex-end; 
+  min-width: 0;      /* key for flex shrink */
+  }
+  
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+  
+  .navbar a:hover {
+    color: var(--gold);
+    text-decoration: none;
+  }
+  
+  /* Hamburger Menu */
+  .menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .menu-toggle:hover {
+    color: var(--gold);
+  }
+  
+  /* Responsive Menu */
+  @media (max-width: 1200px) {
+    .navbar nav {
+      display: none;
+      flex-direction: column;
+      background: var(--red-dark);
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 220px;
+      padding: 1rem;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  
+    .navbar nav.active {
+      display: flex;
+    }
+  
+    .menu-toggle {
+      display: block;
+    }
+  }
+  
+  /* Button Styles */
+  .btn { 
+    display: inline-block; 
+    padding: .75rem 1.5rem; 
+    margin: 5px;
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 700;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .btn-primary { 
+    background: var(--red); 
+    color: white; 
+    box-shadow: 0 2px 4px rgba(179, 0, 0, 0.2);
+  }
+  .btn-primary:hover { 
+    background: var(--red-dark); 
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(179, 0, 0, 0.3);
+  }
+  .btn-outline { 
+    background: transparent; 
+    color: white; 
+    border: 2px solid white;
+  }
+  .btn-outline:hover { 
+    background: white; 
+    color: var(--red);
+  }
+  
+  /* Special donate button */
+  .btn-donate {
+    background: var(--green);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 102, 0, 0.2);
+  }
+  .btn-donate:hover {
+    background: var(--green-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 102, 0, 0.3);
+  }
+  
+  footer {
+    background: var(--text);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .hero {
+    position: relative;
+    height: clamp(320px, 45vh, 560px);
+    overflow: hidden;
+  }
+  .hero img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    filter: contrast(1.05) saturate(1.05); 
+  }
+  .hero-overlay {
+    position: absolute; 
+    inset: 0;
+    background: linear-gradient(to right, rgba(34,34,34,0.7), rgba(34,34,34,0.3));
+    display: grid; 
+    place-content: center; 
+    text-align: center; 
+    color: white; 
+    padding: 1rem;
+  }
+  .hero h2 { 
+    font-size: clamp(1.6rem, 2.8vw, 3rem); 
+    margin: 0 0 .5rem; 
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  .hero p { 
+    font-size: clamp(1rem, 1.4vw, 1.25rem); 
+    margin: 0 0 1rem; 
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .hero-actions { 
+    display: inline-flex; 
+    gap: .75rem; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+  }
+  
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; 
+    padding: 2rem;
+    background: var(--bg);
+  }
+  .feature-card {
+    background: var(--panel); 
+    border-radius: 16px; 
+    overflow: hidden; 
+    text-decoration: none; 
+    color: var(--text);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 1px solid var(--line);
+  }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.12);
+  }
+  .feature-card img { 
+    width: 100%; 
+    height: 180px; 
+    object-fit: cover; 
+    transition: transform 0.3s ease;
+  }
+  .feature-card:hover img {
+    transform: scale(1.05);
+  }
+  .feature-meta { 
+    padding: 1.25rem 1.5rem 1.5rem; 
+  }
+  .feature-meta h3 { 
+    margin: .5rem 0 .75rem; 
+    color: var(--text);
+    font-size: 1.25rem;
+  }
+  .feature-meta p {
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .icon { 
+    display: inline-flex; 
+    width: 32px; 
+    height: 32px; 
+    margin-bottom: 0.5rem;
+  }
+  .icon svg { 
+    width: 100%; 
+    height: 100%; 
+    fill: var(--red); 
+  }
+  
+  .page-hero { 
+    position: relative; 
+    height: 240px; 
+    overflow: hidden; 
+    margin-bottom: 1.5rem; 
+    border-radius: 0 0 16px 16px;
+  }
+  .page-hero img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    filter: brightness(0.7); 
+  }
+  .page-hero h2 { 
+    position: absolute; 
+    bottom: 20px; 
+    left: 24px; 
+    color: white; 
+    margin: 0; 
+    font-size: 2rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+
+  .newsletter { 
+    padding: 2rem; 
+    background: var(--bg);
+  }
+  .newsletter-card {
+    background: var(--panel); 
+    border-left: 6px solid var(--red); 
+    border-radius: 12px;
+    padding: 1.5rem; 
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    border: 1px solid var(--line);
+  }
+  .newsletter .icon svg { 
+    fill: var(--red); 
+  }
+  
+  /* Main content styling */
+  main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  main h2 {
+    color: var(--text);
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+  
+  main p {
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Calendar styling */
+  #calendar {
+    background: var(--panel);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+  
+  /* Library list styling */
+  main ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  main li {
+    margin-bottom: 1rem;
+  }
+  
+  main a {
+    color: var(--red);
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    display: block;
+    background: var(--panel);
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    transition: all 0.2s ease;
+  }
+  
+  main a:hover {
+    background: var(--red);
+    color: white;
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(179, 0, 0, 0.2);
+  }
+
+  /* Newsletter form border */
+#newsletter-form {
+    border: 2px solid #B30000;           /* protest red */
+    border-radius: 12px;
+    background: #fff;
+    padding: 0.75rem;
+    max-width: 560px;
+    margin: 0.5rem auto;                  /* center it */
+    display: grid;
+    grid-template-columns: 1fr auto;      /* email | button */
+    gap: 0.5rem;
+  }
+  
+  #newsletter-form input[type="email"] {
+    padding: .6rem .7rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    min-width: 200px;
+  }
+  
+  #newsletter-form button {
+    background: #B30000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: .65rem 1rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  #newsletter-form button:hover { opacity: .9; }
+  
+  /* Stack on small screens */
+  @media (max-width: 480px) {
+    #newsletter-form { grid-template-columns: 1fr; }
+  }
+  

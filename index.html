@@ -117,3 +117,69 @@
   <script src="script.js"></script>
 </body>
 </html>
+
+<script>
+    const cb = document.getElementById('nav-toggle');
+    const btn = document.querySelector('.menu-toggle');
+    const menu = document.getElementById('menu');
+  
+    function sync(){ btn?.setAttribute('aria-expanded', cb?.checked ? 'true' : 'false'); }
+    cb?.addEventListener('change', sync); sync();
+  
+    // Close menu when a nav link is clicked (mobile)
+    menu?.addEventListener('click', e => {
+      if (e.target.tagName === 'A') { cb.checked = false; sync(); }
+    });
+  
+    // Close on Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { cb.checked = false; sync(); }
+    });
+
+    
+  </script>
+  <div id="calendar"></div>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    let events = [];
+    try {
+      const res = await fetch('assets/events.json', {cache:'no-store'});
+      events = await res.json();
+    } catch {}
+    const cal = new FullCalendar.Calendar(document.getElementById('calendar'), {
+      initialView: 'dayGridMonth',
+      height: 'auto',
+      events
+    });
+    cal.render();
+  });
+  </script>
+
+<form id="newsletter-form" action="https://formspree.io/f/YOUR_ID" method="POST">
+    <input type="email" name="email" placeholder="you@example.com" required>
+    <button type="submit">Subscribe</button>
+    <p id="news-msg" role="status" aria-live="polite"></p>
+  </form>
+  
+  <script>
+  const form = document.getElementById('newsletter-form');
+  const msg  = document.getElementById('news-msg');
+  
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msg.textContent = 'Sending…';
+    try {
+      const r = await fetch(form.action, { method:'POST', body:new FormData(form), headers:{'Accept':'application/json'} });
+      if (r.ok) {
+        form.reset();
+        msg.textContent = 'Thanks! Please check your inbox.';
+      } else {
+        msg.textContent = 'Hmm, something went wrong. Please try again.';
+      }
+    } catch {
+      msg.textContent = 'Network error — try again in a moment.';
+    }
+  });
+  </script>
+  
